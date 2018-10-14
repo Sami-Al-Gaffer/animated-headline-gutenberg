@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name: Hello Gutenberg
+ * Plugin Name: sami Gutenberg
  * Plugin URI: https://github.com/HardeepAsrani/hello-gutenberg/
  * Description: Gutenberg examples.
  * Author: Hardeep Asrani
@@ -15,6 +15,8 @@
 
 defined('ABSPATH') || exit;
 
+//echo plugins_url('blocks/myfirstblock/editor-script.js',__FILE__);
+
 
 //Check The Gutenberg
 
@@ -26,36 +28,37 @@ if(function_exists('the_gutenbert_project')){
 
 			wp_register_script( 
 				'jmogutenberg-myfirstblock-editor',  //name of the script
-				 plugins_url('blocks/myfirstblock/editor-script.js',__FILE__), //Url of scripts
-				  array( 'wp-blocks','wp-element' )  //required dependencies for gutenberg
+				 plugins_url('blocks/myfirstblock/editor-script.js', __FILE__ ), //Url of scripts
+				 array( 'wp-blocks','wp-element' )  //required dependencies for gutenberg
 			 );
 
 				//Register global block css
 
-			wp_register_script( 
+			wp_register_style( 
 				'jmogutenberg-myfirstblock',  //name of the script
-				 plugins_url('blocks/myfirstblock/style.css',__FILE__), //Url of scripts
-				  array( 'wp-edit-blocks' )  //required dependencies for gutenberg
-				  filemtime(plugin_dir_path(__FILE__) . 'blocks/myfirstblock/style.css')
+				 plugins_url('/blocks/myfirstblock/style.css',__FILE__), //Url of scripts
+				  array( 'wp-edit-blocks' ),  //required dependencies for gutenberg
+				  filemtime(plugin_dir_path(__FILE__) . '/blocks/myfirstblock/style.css')
 			 );
 
-			//register editor only css
+			// //register editor only css
 
-			wp_register_script( 
-				'jmogutenberg-myfirstblock-editor',  //name of the script
-				 plugins_url('blocks/myfirstblock/editor-style.js',__FILE__), //Url of scripts
-				  array( 'wp-edit-blocks' )  //required dependencies for gutenberg
-				  filemtime(plugin_dir_path(__FILE__) . 'blocks/myfirstblock/editor-style.css')
+			wp_register_style( 
+				'jmogutenberg-myfirstblock-editor',  //name of the style
+				 plugins_url('/blocks/myfirstblock/editor-style.css',__FILE__), //Url of scripts
+				  array( 'wp-edit-blocks' ),  //required dependencies for gutenberg
+				  filemtime(plugin_dir_path(__FILE__) . '/blocks/myfirstblock/editor-style.css')
 			 );
 
 				//register block type
-			Register_block_type('jmogutenberg/myfirstblock'array(
+			Register_block_type('jmogutenberg/myfirstblock',array(
 				'editor-script' 		=> 'jmogutenberg-myfirstblock-editor',
 				'editor-style'			=> 'jmogutenberg-myfirstblock-editor',
-				'style'					=>	'jmogutenberg-myfirstblock',
+				'style'					=> 'jmogutenberg-myfirstblock',
 			));
 		}
 
 		add_action( 'init', 'jmogutenberg_block' );
 	}
+
 }
